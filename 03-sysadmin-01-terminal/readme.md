@@ -9,7 +9,10 @@
 и перезапустить ВМ: vagrant halt -> vagrant up. ВМ будет запущена с новым названием и характеристиками.
 ![vagrant_config](img/3-1.png)
 4. Через vagrant ssh провалился в shell ВМ
+
 ![vm_shell](img/4-1.png)
+
+
 5. За длину журнала history отвечает переменная HISTFILESIZE. Это описывается в мане, в строчках 548-551. 
 ![history](img/5-1.png)
 
