@@ -34,7 +34,10 @@ mkdir -p /tmp/new_path_directory/bash
 cp /usr/bin/bash /tmp/new_path_directory/bash
 export PATH="/tmp/new_path_directory/bash:$PATH"
 ![PATH](img/9-1.png)
-10. at и batch. 
+
+
+10. at и batch.
 at используется для назначения одноразового задания в указанное время.
 batch используется для назначения одноразового задания, которые должны выполняться когда загрузка системы становится ниже определенного значения.
+
 11. Отключил через vagrant halt
