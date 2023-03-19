@@ -60,16 +60,17 @@
 
 ### Ответы:
 
-Добавил новые переменные:
+Прописал новые переменные в variables.tf:
 
 ![new_vars.png](img/2_1.png)
 
-Заменил все "хардкод" значения:
-![main_file_tf.png](img/2_2.png)
+Добавил ссылки на эти переменные в main.tf:
 
-При применении terraform plan изменений не произошло:
-![tf_plan.png](img/2_3.png)
+![main_tf.png](img/2_2.png)
 
+Изменений в конфигурации после этого не последовало:
+
+![tf_apply.png](img/2_3.png)
 
 ### Задание 3:
 ```
@@ -82,14 +83,15 @@
 
 ### Ответы:
 
-Объявил новые переменные:
-![new_vars.png](img/3_1.png)
+Скопировал блок ресурса:
+![new_vm.png](img/3_1.png)
 
-Создал файл с новым ресурсом:
-![new_vm_db.png](img/3_2.png)
+Определил новые переменные:
 
-И в конце создал ВМ:
-![tf_apply_db.png](img/3_3.png)
+![new_vm_vars.png](img/3_2.png)
+
+Создал ВМ:
+![yc_dashboard.png](img/3_3.png)
 
 ### Задание 4:
 ```
@@ -102,12 +104,11 @@
 
 ### Ответы:
 
-Создал файл outputs.tf:
+Описал файл outputs.tf:
 ![outputs_tf.png](img/4_1.png)
 
-Вывод после tf apply:
-![tf_after_apply.png](img/4_2.png)
-
+Вывод tf apply:
+![tf_apply.png](img/4_2.png)
 
 ### Задание 5:
 ```
@@ -119,3 +120,63 @@
 ```
 
 ### Ответы:
+
+Определил переменные для названий виртуальных машин:
+
+![locals_tf.png](img/5_1.png)
+
+Сделал ссылки на эти переменные (для DB аналогично):
+
+![locals_tf.png](img/5_2.png)
+
+После этого применил изменения.
+
+### Задание 6:
+```
+Вместо использования 3-х переменных ".._cores",".._memory",".._core_fraction" в блоке resources {...}, объедените их в переменные типа map с именами "vm_web_resources" и "vm_db_resources".
+
+Так же поступите с блоком metadata {serial-port-enable, ssh-keys}, эта переменная должна быть общая для всех ваших ВМ.
+
+Найдите и удалите все более не используемые переменные проекта.
+
+Проверьте terraform plan (изменений быть не должно).
+```
+
+### Ответы:
+
+Определил новые переменные:
+
+![locals_tf.png](img/6_1.png)
+
+Дал ссылки на эти переменные в блоке main.tf (аналогично для vm db):
+
+![locals_tf.png](img/6_2.png)
+
+После этого применил изменения.
+
+### Задание 7:
+```
+Изучите сожержимое файла console.tf. Откройте terraform console, выполните следующие задания:
+
+Напишите, какой командой можно отобразить второй элемент списка test_list?
+
+Найдите длину списка test_list с помощью функции length(<имя переменной>).
+
+Напишите, какой командой можно отобразить значение ключа admin из map test_map ?
+
+Напишите interpolation выражение, результатом которого будет: "John is admin for production server based on OS ubuntu-20-04 with X vcpu, Y ram and Z virtual disks", используйте данные из переменных test_list, test_map, servers и функцию length() для подстановки значений.
+
+В качестве решения предоставьте необходимые команды и их вывод.
+```
+
+### Ответы:
+
+1. local.test_list[1]
+2. length(local.test_list)
+3. local.test_map.admin
+
+![tf_console.png](img/7_1.png)
+
+4. "${local.test_map.admin} is admin for production server based on OS ${local.servers.production.image} with ${local.servers.production.cpu} vcpu, ${local.servers.production.ram} ram and ${length(local.servers.production.disks)} virtual disks"
+
+![tf_interpolation.png](img/7_2.png)
