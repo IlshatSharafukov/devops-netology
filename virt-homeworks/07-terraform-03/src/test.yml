@@ -1,0 +1,15 @@
+---
+
+- name: test
+  gather_facts: false
+  hosts: all
+  vars:
+    ansible_user: centos
+  become: yes
+  tasks:
+  
+  - name: Install Nano on CentOS-7
+    yum:
+      name: nano
+      state: latest   
+      update_cache: yes 

@@ -1,0 +1,20 @@
+[disk_vm]
+
+%{~ for i in disk_vm ~}
+
+${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]} 
+%{~ endfor ~}
+
+[each_vm]
+
+%{~ for i in each_vm ~}
+
+${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]} 
+%{~ endfor ~}
+
+[count_vm]
+
+%{~ for i in count_vm ~}
+
+${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]} 
+%{~ endfor ~}
