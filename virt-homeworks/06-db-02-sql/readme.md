@@ -6,6 +6,8 @@
 
 Развернул инстанс Pgsql 12 версии с помощью docker-compose 2 volume.
 
+https://github.com/khezen/compose-postgres
+
 ![pgsql_docker.png](img/1_1.png)
 
 
@@ -80,4 +82,42 @@ SELECT * from information_schema.table_privileges WHERE grantee in ('test_admin_
 
 ![pgsql_user_select.png](img/2_3.png)
 
+
+### Задание 3: Используя SQL-синтаксис, наполните таблицы следующими тестовыми данными:
+
+![test_data.png](img/3_0.png)
+
+### Используя SQL-синтаксис: вычислите количество записей для каждой таблицы.
+
+```
+INSERT INTO orders (name, price)
+VALUES('Шоколад', '10'),
+('Принтер', '3000'),
+('Монитор', '7000'),
+('Гитара', '4000'),
+('Книга', '500');
+
+
+INSERT INTO clients (surname, country)
+VALUES('Иванов Иван Иванович', 'USA'),
+('Петров Петр Петрович', 'Canada'),
+('Иоганн Себастьян Бах', 'Japan'),
+('Ронни Джеймс Дио', 'Russia'),
+('Ritchie Blackmore', 'Russia');
+```
+
+Количество записей в таблицах можно получить с помощью функции count() для метода SELECT:
+
+```
+SELECT count(*) from clients;
+SELECT count(*) from orders;
+```
+
+Результат выполнения команды:
+
+![select_count.png](img/3_1.png)
+
+### Задание 4: Часть пользователей из таблицы clients решили оформить заказы из таблицы orders. Используя foreign keys, свяжите записи из таблиц, согласно таблице ниже. Приведите SQL-запросы для выполнения этих операций. Приведите SQL-запрос для выдачи всех пользователей, которые совершили заказ, а также вывод этого запроса. Подсказка: используйте директиву UPDATE.
+
+![foreign keys.png](img/4_0.png)
 
