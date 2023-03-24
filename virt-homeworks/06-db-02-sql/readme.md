@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS clients (
 id serial PRIMARY KEY,
 surname varchar(200) NOT NULL,
 country varchar(200) NOT NULL,
-orders integer REFERENCES orders (id) NOT NULL);
+orders integer REFERENCES orders (id));
 
 CREATE ROLE test_admin_user LOGIN PASSWORD 'Zaq12wsx';
 CREATE ROLE test_simple_user LOGIN PASSWORD 'Zaq12wsx12';
@@ -120,4 +120,61 @@ SELECT count(*) from orders;
 ### Задание 4: Часть пользователей из таблицы clients решили оформить заказы из таблицы orders. Используя foreign keys, свяжите записи из таблиц, согласно таблице ниже. Приведите SQL-запросы для выполнения этих операций. Приведите SQL-запрос для выдачи всех пользователей, которые совершили заказ, а также вывод этого запроса. Подсказка: используйте директиву UPDATE.
 
 ![foreign keys.png](img/4_0.png)
+
+Состояние и вид таблиц в БД до выполнения update:
+
+![db_table.png](img/4_1.png)
+
+```
+UPDATE clients SET orders =5 WHERE id=1;
+UPDATE clients SET orders =3 WHERE id=2;
+UPDATE clients SET orders =4 WHERE id=3;
+```
+
+После этого смотрим кто выполнил заказ и по каким ID:
+
+```
+SELECT * from clients WHERE orders NOTNULL;
+```
+
+Результат выполнения этой команды:
+
+![select_clients.png](img/4_2.png)
+
+### Задание 5: Получите полную информацию по выполнению запроса выдачи всех пользователей из задачи 4 (используя директиву EXPLAIN). Приведите получившийся результат и объясните, что значат полученные значения.
+
+Для анализа запроса воспользовался следующей командой:
+
+```
+EXPLAIN SELECT * FROM clients;
+```
+
+Результат выполнения этой команды:
+
+![explain_clients.png](img/5_1.png)
+
+Sec Scan - последовательное чтение данных таблицы clients;
+cost - условное значение, призванное оценить затратность операции. Первое значение 0.00 - затраты на получение первой строки, Второе значение 10.90 - затраты на получение всех строк.
+rows - приблизительное количество возвращаемых строк при выполнении операции Seq Scan.
+width - средний размер одной строки в байтах. 
+
+### Задание 6:
+
+Создал бэкап БД test_db следующей командой:
+
+```
+pg_dump -U postgres test_db > data/backup/test_db.dump
+```
+
+Выключил контейнер, не удаляя volume. После этого запустил ещё один контейнер, создал пустую БД test_db:
+
+```
+create database test_db;
+```
+
+В конце восстановил структуру таблицы с помощью сделанного бэкап файла:
+
+```
+psql -f data/backup/test_db.dump test_db --username postgres
+```
 
