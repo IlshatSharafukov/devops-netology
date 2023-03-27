@@ -39,3 +39,11 @@ variable "public_key" {
   type    = string
   default = ""
 }
+
+variable "for_each_hw" {
+  type = map
+  default = {
+    "first_vm" = {cpu = "2", mem = "2", disk_size = "10", name_prefix = "01"}
+    "second_vm" = {cpu = "2", mem = "2" , disk_size = "10", name_prefix = "02"}
+  }
+  }

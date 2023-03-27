@@ -1,10 +1,7 @@
 resource "yandex_compute_instance" "compute_instance_home-work-for-each" {
   depends_on = [yandex_compute_instance.compute_instance_home-work-count, yandex_compute_disk.disk] 
 
-  for_each = {  
-    "first_vm" = {cpu = "2", mem = "2", disk_size = "10", name_prefix = "01"}
-    "second_vm" = {cpu = "2", mem = "2" , disk_size = "10", name_prefix = "02"}
-  }
+  for_each = var.for_each_hw
 
   name                      = "terraform-homework-each-loop-${each.value.name_prefix}"
   zone                      = "ru-central1-a"
