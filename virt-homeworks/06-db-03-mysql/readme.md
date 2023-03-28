@@ -30,6 +30,7 @@
 ![mysql_version.png](img/1_1.png)
 
 Список таблиц и количество записей c price > 300:
+
 ![mysql_table.png](img/1_2.png)
 
 
