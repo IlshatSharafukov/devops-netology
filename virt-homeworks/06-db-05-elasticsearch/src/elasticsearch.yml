@@ -1,0 +1,5 @@
+cluster.name: my-application-test
+network.host: 0.0.0.0
+node.name: netology_test
+discovery.type: single-node
+path.data: /var/lib/elasticsearch/elasticsearch-7.14.0/
