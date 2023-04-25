@@ -1,0 +1,7 @@
+---
+clickhouse:
+  hosts:
+    clickhouse:
+      ansible_host: 158.160.51.67
+      
+      
