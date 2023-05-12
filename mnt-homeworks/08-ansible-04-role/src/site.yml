@@ -1,0 +1,52 @@
+---
+- name: Install Clickhouse
+  hosts: clickhouse
+  user: centos
+  roles: 
+    - clickhouse
+  tags:
+    - clickhouse
+- name: Install Vector
+  hosts: vector
+  user: centos
+  roles: 
+    - vector
+  tags:
+    - vector
+- name: Install nginx
+  hosts: lighthouse
+  remote_user: centos
+  handlers:
+    - name: Reload nginx
+      become: true
+      ansible.builtin.command: nginx -s reload
+  tasks:
+    - name: Install EPEL
+      become: true
+      ansible.builtin.yum:
+        name:
+          - epel-release
+    - name: Install nginx
+      become: true
+      ansible.builtin.yum:
+        name:
+          - nginx
+    - name: Ensure nginx is running
+      become: true
+      ansible.builtin.service:
+        name: nginx
+        state: started
+  tags:
+    - lighthouse
+- name: Install lighthouse
+  hosts: lighthouse
+  remote_user: centos
+  roles: 
+    - lighthouse
+  pre_tasks:
+    - name: install git
+      become: true
+      ansible.builtin.yum:
+        name: git
+  tags:
+    - lighthouse
