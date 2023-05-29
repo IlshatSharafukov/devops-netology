@@ -62,4 +62,5 @@
 
 Ссылка на git с коллекцией и tar.gz архивом:
 
-https://github.com/IlshatSharafukov/my-own-collection/tree/main/yandex_cloud_elk
+https://github.com/IlshatSharafukov/my-own-collection/tree/v1.0.0/yandex_cloud_elk
+
