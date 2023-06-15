@@ -60,4 +60,12 @@ Jenkins agent на centos7 встал нормально, но molecule ни в 
 
 ![Multibranch_pipeline_logs](img/2_6.png)
 
-5) 
+5) Произвел необходимые изменения, проверил работу плейбука:
+
+![if-else_statements](img/2_7.png)
+
+![if-else_result](img/2_8.png)
+
+6) Ссылка на репозиторий: 
+
+https://github.com/IlshatSharafukov/vector-role
