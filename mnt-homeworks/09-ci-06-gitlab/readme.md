@@ -54,5 +54,5 @@ docker run -itd -p 5290:5290 476f454f9ed9
 
 В браузере проверил корректность метода get_info нашего API:
 
-![gitlab_api](img/1_8.png)
+![gitlab_api](img/1_9.png)
 
