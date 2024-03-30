@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netology
+  labels:
+    app: netology
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netology
+  template:
+    metadata:
+      labels:
+        app: netology
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command: [ 'sh', '-c', 'while true; do echo test > /busy/test.txt;sleep 5; done; ']
+        volumeMounts:
+          - name: vol
+            mountPath: /busy
+      - name: network-multitool
+        image: wbitt/network-multitool
+        volumeMounts:
+          - name: vol
+            mountPath: /multi
+      volumes:
+        - name: vol
+          persistentVolumeClaim:
+            claimName: pvc-vol

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netology-nfs
+  labels:
+    app: netology-nfs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netology-nfs
+  template:
+    metadata:
+      labels:
+        app: netology-nfs
+    spec:
+      containers:
+      - name: network-multitool
+        image: wbitt/network-multitool
+        volumeMounts:
+          - name: vol
+            mountPath: /multi
+      volumes:
+        - name: vol
+          persistentVolumeClaim:
+            claimName: my-pvc
