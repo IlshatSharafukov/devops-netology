@@ -94,7 +94,7 @@ pip3 install ansible
          	--namespace=monitoring
          kubectl apply -f manifests/
 
-Убедился, что все поды нормально запустились:
+Убедился что все поды нормально запустились:
 
 ![moniroting_deploy](img/6.png)
 
