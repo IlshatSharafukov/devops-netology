@@ -1,0 +1,29 @@
+[all]
+
+%{~ for i in kube_node ~}
+
+${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]}  ip=${i["network_interface"][0]["ip_address"]}
+
+%{~ endfor ~}
+
+[kube_control_plane]
+${kube_node[0]["name"]}
+
+
+[etcd]
+${kube_node[0]["name"]}
+
+
+[kube_node]
+${kube_node[1]["name"]}
+${kube_node[2]["name"]}
+
+
+[all:vars]
+ansible_ssh_user=centos
+ansible_ssh_private_key_file=/home/ruasfih/.ssh/id_rsa
+supplementary_addresses_in_ssl_keys='["${kube_node[0]["network_interface"][0]["nat_ip_address"]}"]'  # для выписывания сертификата публичному адресу, для доступа по API
+
+[k8s_cluster:children]
+kube_control_plane
+kube_node
